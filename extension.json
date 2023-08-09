@@ -1,0 +1,37 @@
+{
+    "name": "GoogleTagManager",
+    "type": "skin",
+    "author": [
+        "Gerard Boyers"
+    ],
+    "url": "https://github.com/gboyers/MediaWiki-GoogleTagManager",
+    "descriptionmsg": "googletagmanager-desc",
+    "version": "1.0.0",
+    "license-name": "GPL-3.0-or-later",
+    "manifest_version": 2,
+    "callback": "GoogleTagManagerHooks::onExtensionLoad",
+    "load_composer_autoloader": true,
+    "Hooks": {
+        "BeforePageDisplay": "GoogleTagManagerHooks::onBeforePageDisplay"
+    },
+    "AutoloadClasses": {
+        "GoogleTagManagerHooks": "includes/Hooks.php"
+    },
+    "ResourceModules": {
+        "ext.GoogleTagManager": {
+            "scripts": [],
+            "styles": [],
+            "localBasePath": "",
+            "remoteExtPath": ""
+        }
+    },
+    "MessagesDirs": {
+        "GoogleTagManager": "i18n"
+    },
+    "config": {
+        "GoogleTagManagerID": {
+            "value": "",
+            "description": "Your Google Tag Manager ID"
+        }
+    }
+}
