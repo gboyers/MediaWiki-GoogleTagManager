@@ -2,6 +2,10 @@
 
 class GoogleTagManagerHooks {
 
+public static function onExtensionLoad() {
+    // Code that runs when your extension is loaded
+}
+
 public static function onBeforePageDisplay(OutputPage &$out, Skin &$skin) {
     global $wgGoogleTagManagerID;
 
