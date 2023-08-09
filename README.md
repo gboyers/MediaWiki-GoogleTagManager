@@ -26,6 +26,29 @@ This extension allows you to seamlessly integrate [Google Tag Manager](https://t
 
 Once installed and configured, the Google Tag Manager script will be automatically embedded into the pages of your MediaWiki site. You can then utilise the Google Tag Manager dashboard to manage your tags, triggers, and variables.
 
+## Content Security Policy
+
+Newer versions of MediaWiki can use [Content Security Policy (CSP)](https://www.mediawiki.org/wiki/Manual:$wgCSPHeader) to prevent scripts being called from other websites. 
+
+This extension is being modified to work with default Mediawiki CSP settings, but may not work if you enabled stricter settings. You can read up on [Mediawiki's plans for CSP](https://www.mediawiki.org/wiki/Requests_for_comment/Content-Security-Policy).  
+
+This version of ths extension passes the 'nonce' code to Google Tag Manager, which is unique every time the page loads. This solves some of the issues with enabling CSP.
+
+However, individual scripts you use via Google Tag Manager may not work. In your `LocalSettings.php`, you can add or modify the `$wgCSPHeader` configuration as follows to allow each domain. 
+
+For example, to use Google Tag Manager's [Tag Assistant](https://tagassistant.google.com/), the following configuration (at minimum) is required
+
+```php
+$wgCSPHeader = [
+    'script-src' => [ 'https://tagmanager.google.com' ],
+    'style-src' => [ 'https://tagmanager.google.com', 'https://fonts.googleapis.com' ],
+    'img-src' => [ 'https://ssl.gstatic.com', 'https://www.gstatic.com' ],
+    'font-src' => [ 'https://fonts.gstatic.com', 'data:' ]
+];
+```
+
+See [Manual:$wgCSPHeader](https://www.mediawiki.org/wiki/Manual:$wgCSPHeader) for more information.
+
 ## Contributing
 
 Contributions to this extension are warmly welcomed! If you encounter any issues or have suggestions for improvements, please submit them to the GitHub repository's [issues page](https://github.com/gboyers/MediaWiki-GoogleTagManager/issues).
